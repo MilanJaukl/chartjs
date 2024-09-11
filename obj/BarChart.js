@@ -1,0 +1,1 @@
+class BarChart extends Chart {}
