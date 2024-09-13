@@ -5,3 +5,5 @@ export enum ChartType {
   Pie = "pie",
   Pareto = "pareto",
 }
+
+(window as any).ChartType = ChartType;

@@ -12,3 +12,36 @@ Charter class, centralizes and encapsulates the chart creation logic, simplifyin
 
 - PHP DTO class
 - Color Pallete
+
+## Documentation
+
+Example of config which will be return via DTO:
+
+<pre> 
+response = {
+    type: "horizontalBar",
+    data: {
+        labels: ["A", "B", "C"],
+        datasets: [
+        {
+            label: "Series 1",
+            data: [1, 2, 3],
+        },
+        ],
+    },
+    title: "Horizontal Bar Chart",
+    legendVisible: false,
+    };
+</pre>
+
+Inicialization of object in javascript
+
+<pre>
+    Charter.createChart(bar, "bar");
+</pre>
+
+### Supported chart types
+
+- Bar
+- Horizontal Bar
+- Pareto Chart
