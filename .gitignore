@@ -1,5 +1,2 @@
-# Ignore src directory
-src/
-
 # Ignore node_modules directory
 node_modules/
