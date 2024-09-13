@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "strict": true,
+    "lib": ["ESNext", "dom"],
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true, // Corrected this line
+    "outDir": "dist", // Ensures output goes to the 'dist' folder,
+    "target": "ESNext",
+    "module": "ES6",
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "watch": true
-  },
-  "include": ["./src/**/*.ts"],
-  "exclude": ["node_modules"]
+    "forceConsistentCasingInFileNames": true
+  }
 }
