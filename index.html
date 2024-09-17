@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="icon" href="icon.png" type="image/png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DTO</title>
@@ -18,6 +19,7 @@
     style="
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 300px;
       gap: 3rem;
       margin: 1rem;
     "
@@ -28,6 +30,10 @@
 
     <div class="shadow border p-2 px-3 rounded bg-light-subtle">
       <canvas id="hbar"></canvas>
+    </div>
+
+    <div class="shadow border p-2 px-3 rounded bg-light-subtle">
+      <canvas id="pbar"></canvas>
     </div>
 
     <script>
@@ -66,8 +72,28 @@
         legendVisible: false,
       };
 
+      const pbar = {
+        type: "pareto",
+        data: {
+          labels: ["A", "B", "C"],
+          datasets: [
+            {
+              label: "Series 1",
+              data: [1, 2, 3],
+              backgroundColor: [window.charter.colors.indigoDye],
+            },
+          ],
+        },
+        title: "Pareto Chart",
+        legendVisible: false,
+        customConfig: {
+          lineColor: window.charter.colors.blush,
+        },
+      };
+
       Charter.createChart(bar, "bar");
       Charter.createChart(hbar, "hbar");
+      Charter.createChart(pbar, "pbar");
     </script>
   </body>
 </html>

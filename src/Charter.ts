@@ -5,6 +5,7 @@ import { DataType } from "./DataType";
 import ChartConfig from "./ChartConfig";
 import { Chart } from "chart.js/auto";
 import AjaxConfig from "./AjaxConfig";
+import ParetoChart from "./ParetoChart";
 
 const colors = {
   indigoDye: "#00406eff",
@@ -43,6 +44,7 @@ class Charter {
         title: string;
         options: any;
         legendVisible: boolean;
+        customConfig: any;
       };
     } else {
       throw new Error("Invalid chart config");
@@ -54,7 +56,8 @@ class Charter {
       data.data,
       data.title,
       data.options,
-      data.legendVisible
+      data.legendVisible,
+      data.customConfig
     );
     // --------------------------------------------------
 
@@ -81,6 +84,9 @@ class Charter {
         break;
       case ChartType.HorizontalBar:
         chart = new HorizontalBarCHart(config, container);
+        break;
+      case ChartType.Pareto:
+        chart = new ParetoChart(config, container);
         break;
       default:
         throw new Error("Invalid chart type");

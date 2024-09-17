@@ -17,6 +17,7 @@ export default class ChartConfig {
   title: string;
   options: any;
   legendVisible: boolean;
+  customConfig: any;
 
   constructor(
     type: ChartType,
@@ -24,7 +25,8 @@ export default class ChartConfig {
     data: any,
     title: string,
     options: any,
-    legendVisible: boolean
+    legendVisible: boolean,
+    customConfig: any
   ) {
     this.type = type;
     this.dataType = dataType;
@@ -32,5 +34,6 @@ export default class ChartConfig {
     this.title = title;
     this.options = options;
     this.legendVisible = legendVisible;
+    this.customConfig = customConfig;
   }
 }

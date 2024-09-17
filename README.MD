@@ -6,7 +6,8 @@ Charter class, centralizes and encapsulates the chart creation logic, simplifyin
 
 - auto resizing font sizes
 - predefined charts
-- AJAX
+- AJAX + updating
+- loading indicator
 
 #### Cames also with:
 
