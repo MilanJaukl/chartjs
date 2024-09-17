@@ -5,7 +5,7 @@ import BaseChart from "./BaseChart";
 import { merge } from "lodash";
 
 export default class ParetoChart extends BaseChart implements ChartStrategy {
-  createChart(): void {
+  createChart(): Chart {
     const options = {
       scales: {
         x: {
@@ -45,7 +45,7 @@ export default class ParetoChart extends BaseChart implements ChartStrategy {
 
     let data = this.getData();
 
-    new Chart(this.chartContainer, {
+    return new Chart(this.chartContainer, {
       type: "line",
       data: {
         labels: data.labels,

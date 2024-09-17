@@ -1,5 +1,6 @@
 import ChartConfig from "./ChartConfig";
 import { merge, size } from "lodash";
+import { Chart } from "chart.js/auto";
 
 export default class BaseChart {
   protected config: ChartConfig;
@@ -45,6 +46,8 @@ export default class BaseChart {
 
   protected getOptions(): any {
     const defaultOptions: any = {
+      responsive: true,
+      maintainAspectRatio: false,
       layout: {
         padding: {},
       },

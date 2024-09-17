@@ -1,5 +1,6 @@
 import ChartConfig from "./ChartConfig";
+import { Chart } from "chart.js/auto";
 
 export default interface ChartStrategy {
-  createChart(): void;
+  createChart(): Chart;
 }

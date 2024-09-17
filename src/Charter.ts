@@ -91,7 +91,11 @@ class Charter {
       default:
         throw new Error("Invalid chart type");
     }
-    chart.createChart();
+    let obj: Chart = chart.createChart();
+
+    window.addEventListener("resize", () => {
+      obj.resize();
+    });
   }
 
   static createChartWithAjax(

@@ -5,7 +5,7 @@ import BaseChart from "./BaseChart";
 import { merge } from "lodash";
 
 export default class BarChart extends BaseChart implements ChartStrategy {
-  createChart(): void {
+  createChart(): Chart {
     const options = {
       scales: {
         x: {
@@ -21,7 +21,7 @@ export default class BarChart extends BaseChart implements ChartStrategy {
       },
     };
     console.log(merge({}, options, this.getOptions()));
-    new Chart(this.chartContainer, {
+    return new Chart(this.chartContainer, {
       type: "bar",
       data: this.getData(),
       options: merge({}, options, this.getOptions()),
