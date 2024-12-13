@@ -22,6 +22,7 @@ export default class BaseChart {
                 label: element.label,
                 data: element.data,
                 backgroundColor: element.backgroundColor,
+                borderColor: element.borderColor,
                 borderWidth: 0,
                 borderRadius: 5,
                 borderSkipped: false,
