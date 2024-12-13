@@ -21,7 +21,7 @@ const colors = {
 (window as any).charter = { colors: colors };
 
 class Charter {
-  static createChart(chartConfig: unknown, chartContainerId: string): void {
+  static createChart(chartConfig: unknown, chartContainerId: string): Chart {
     // CHECK VALIDITY OF CHART CONFIG
 
     if (!chartConfig) {
@@ -62,18 +62,12 @@ class Charter {
     // --------------------------------------------------
 
     // CHECK VALIDITY OF CHART CONTAINER
-    let htmlElement = document.getElementById(
+    let container = document.getElementById(
       chartContainerId
     ) as HTMLCanvasElement;
-    if (!htmlElement) {
+    if (!HTMLCanvasElement) {
       throw new Error("Invalid chart container id");
     }
-    let content = htmlElement.getContext("2d");
-
-    if (!content) {
-      throw new Error("Invalid canvas context");
-    }
-    let container: CanvasRenderingContext2D = content;
 
     // --------------------------------------------------
 
@@ -96,6 +90,7 @@ class Charter {
     window.addEventListener("resize", () => {
       obj.resize();
     });
+    return obj;
   }
 
   static createChartWithAjax(

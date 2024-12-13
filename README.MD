@@ -8,6 +8,7 @@ Charter class, centralizes and encapsulates the chart creation logic, simplifyin
 - predefined charts
 - AJAX + updating
 - loading indicator
+- ensure responsive while snapping the window
 
 #### Cames also with:
 
@@ -46,3 +47,10 @@ Inicialization of object in javascript
 - Bar
 - Horizontal Bar
 - Pareto Chart
+
+### Good to know
+
+-it is necessary that you wrap the canvas element within a block-level container and position relative
+-do not let the canvas element have any siblings
+
+https://stackoverflow.com/a/76405966/23403613

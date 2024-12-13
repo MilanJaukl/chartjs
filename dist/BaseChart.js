@@ -4,13 +4,16 @@ export default class BaseChart {
     chartContainer;
     width;
     height;
-    widthRatio = 7;
+    titleWidthRatio = 7;
     titleSize;
+    tickWidthRatio = 11;
+    tickFontSize;
     constructor(config, chartContainer) {
         this.config = config;
         this.chartContainer = chartContainer;
-        const chartHeight = chartContainer.canvas.height;
-        this.titleSize = Math.round(chartHeight / this.widthRatio);
+        const chartHeight = chartContainer.height;
+        this.titleSize = Math.round(chartHeight / this.titleWidthRatio);
+        this.tickFontSize = Math.round(chartHeight / this.tickWidthRatio);
     }
     getDatasets() {
         let datasets = [];
@@ -34,6 +37,12 @@ export default class BaseChart {
     }
     getOptions() {
         const defaultOptions = {
+            onResize: (chart, size) => {
+                chart.resize();
+                console.log("resize");
+            },
+            responsive: true,
+            maintainAspectRatio: false,
             layout: {
                 padding: {},
             },
@@ -41,12 +50,14 @@ export default class BaseChart {
                 y: {
                     beginAtZero: true,
                     grid: {
-                        display: true, // Show horizontal grid lines
                         drawTicks: false,
                     },
                     ticks: {
                         padding: 5,
                         maxTicksLimit: 8,
+                        font: {
+                            size: this.tickFontSize,
+                        },
                     },
                     border: {
                         display: false,
@@ -55,17 +66,27 @@ export default class BaseChart {
                 x: {
                     beginAtZero: true,
                     grid: {
-                        display: false,
+                        drawTicks: false,
                     },
                     border: {
                         display: false,
                     },
+                    ticks: {
+                        padding: 5,
+                        maxTicksLimit: 8,
+                        font: {
+                            size: this.tickFontSize,
+                        },
+                    },
                 },
             },
             plugins: {
+                legend: {
+                    display: this.config.legendVisible,
+                },
                 title: {
                     display: true,
-                    text: "Monthly Sales",
+                    text: this.config.title,
                     color: "#00406e",
                     font: {
                         size: this.titleSize,
@@ -78,6 +99,7 @@ export default class BaseChart {
                 },
             },
         };
-        return merge(defaultOptions, this.config.options);
+        console.log(this.config);
+        return merge({}, defaultOptions, this.config.options);
     }
 }

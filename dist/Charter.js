@@ -1,7 +1,20 @@
 import BarChart from "./BarChart";
+import HorizontalBarCHart from "./HorizontalBarChart";
 import { ChartType } from "./ChartType";
 import ChartConfig from "./ChartConfig";
 import { Chart } from "chart.js/auto";
+import ParetoChart from "./ParetoChart";
+const colors = {
+    indigoDye: "#00406eff",
+    frenchBlue: "#0f72b5ff",
+    frenchBlueSubtle: "#18b0d5",
+    yellowGreen: "#98ce00ff",
+    blush: "#fa5089",
+    turquoise: "#16e0bdff",
+    babyPowder: "#fffffaff",
+    pink: "#FF5376",
+};
+window.charter = { colors: colors };
 class Charter {
     static createChart(chartConfig, chartContainerId) {
         // CHECK VALIDITY OF CHART CONFIG
@@ -10,34 +23,43 @@ class Charter {
         }
         let config;
         let data;
-        if (typeof chartConfig == "object" && "type" in chartConfig) {
+        if (typeof chartConfig == "object" &&
+            "type" in chartConfig &&
+            "data" in chartConfig &&
+            "title" in chartConfig) {
             data = chartConfig;
         }
         else {
             throw new Error("Invalid chart config");
         }
-        config = new ChartConfig(data.type, data.dataType, data.data, data.title, data.options);
+        console.log(data);
+        config = new ChartConfig(data.type, data.dataType, data.data, data.title, data.options, data.legendVisible, data.customConfig);
         // --------------------------------------------------
         // CHECK VALIDITY OF CHART CONTAINER
-        let htmlElement = document.getElementById(chartContainerId);
-        if (!htmlElement) {
+        let container = document.getElementById(chartContainerId);
+        if (!HTMLCanvasElement) {
             throw new Error("Invalid chart container id");
         }
-        let content = htmlElement.getContext("2d");
-        if (!content) {
-            throw new Error("Invalid canvas context");
-        }
-        let container = content;
         // --------------------------------------------------
         let chart;
         switch (config.type) {
             case ChartType.Bar:
                 chart = new BarChart(config, container);
                 break;
+            case ChartType.HorizontalBar:
+                chart = new HorizontalBarCHart(config, container);
+                break;
+            case ChartType.Pareto:
+                chart = new ParetoChart(config, container);
+                break;
             default:
                 throw new Error("Invalid chart type");
         }
-        chart.createChart();
+        let obj = chart.createChart();
+        window.addEventListener("resize", () => {
+            obj.resize();
+        });
+        return obj;
     }
     static createChartWithAjax(chartContainerId, ajaxConfig) { }
 }

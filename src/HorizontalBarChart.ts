@@ -8,7 +8,7 @@ export default class HorizontalBarCHart
   extends BaseChart
   implements ChartStrategy
 {
-  createChart(): void {
+  createChart(): Chart {
     const options = {
       indexAxis: "y",
       scales: {
@@ -30,7 +30,7 @@ export default class HorizontalBarCHart
       },
     };
 
-    new Chart(this.chartContainer, {
+    return new Chart(this.chartContainer, {
       type: "bar",
       data: this.getData(),
       options: merge({}, options, this.getOptions()),

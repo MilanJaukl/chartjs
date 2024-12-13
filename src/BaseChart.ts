@@ -4,7 +4,7 @@ import { Chart } from "chart.js/auto";
 
 export default class BaseChart {
   protected config: ChartConfig;
-  protected chartContainer: CanvasRenderingContext2D;
+  protected chartContainer: HTMLCanvasElement;
   protected width: number;
   protected height: number;
   protected titleWidthRatio: number = 7;
@@ -13,11 +13,11 @@ export default class BaseChart {
 
   protected tickFontSize: number;
 
-  constructor(config: ChartConfig, chartContainer: CanvasRenderingContext2D) {
+  constructor(config: ChartConfig, chartContainer: HTMLCanvasElement) {
     this.config = config;
     this.chartContainer = chartContainer;
 
-    const chartHeight = chartContainer.canvas.height;
+    const chartHeight = chartContainer.height;
     this.titleSize = Math.round(chartHeight / this.titleWidthRatio);
     this.tickFontSize = Math.round(chartHeight / this.tickWidthRatio);
   }
@@ -46,6 +46,10 @@ export default class BaseChart {
 
   protected getOptions(): any {
     const defaultOptions: any = {
+      onResize: (chart: any, size: any) => {
+        chart.resize();
+        console.log("resize");
+      },
       responsive: true,
       maintainAspectRatio: false,
       layout: {
